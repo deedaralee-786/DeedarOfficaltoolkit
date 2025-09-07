@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberTrace // Number Lookup</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Share Tech Mono', monospace;
+    }
+    
+    body {
+      background-color: #0a0a0a;
+      color: #00ff41; /* Matrix green */
+      padding: 20px;
+      line-height: 1.6;
+      background-image: 
+        radial-gradient(rgba(0, 255, 65, 0.05) 2px, transparent 2px),
+        radial-gradient(rgba(0, 255, 65, 0.05) 2px, transparent 2px);
+      background-size: 40px 40px;
+      background-position: 0 0, 20px 20px;
+    }
+    
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      border: 1px solid #00ff41;
+      border-radius: 5px;
+      padding: 20px;
+      box-shadow: 0 0 15px rgba(0, 255, 65, 0.2);
+      background-color: rgba(10, 10, 10, 0.95);
+    }
+    
+    .header {
+      text-align: center;
+      margin-bottom: 20px;
+      padding-bottom: 15px;
+      border-bottom: 1px solid #00ff41;
+    }
+    
+    h1 {
+      font-size: 24px;
+      color: #00ff41;
+      text-shadow: 0 0 5px #00ff41;
+      letter-spacing: 2px;
+    }
+    
+    .subtitle {
+      color: #00b330;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+    
+    .input-group {
+      display: flex;
+      margin-bottom: 20px;
+      align-items: center;
+    }
+    
+    input {
+      flex: 1;
+      padding: 12px 15px;
+      background-color: #000;
+      color: #00ff41;
+      border: 1px solid #00ff41;
+      outline: none;
+      font-size: 16px;
+      height: 45px; /* Fixed height */
+    }
+    
+    input::placeholder {
+      color: #007a29;
+    }
+    
+    input:focus {
+      box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+    }
+    
+    button {
+      padding: 0 15px;
+      background-color: #000;
+      color: #00ff41;
+      border: 1px solid #00ff41;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-left: 10px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      height: 45px; /* Same height as input */
+      white-space: nowrap;
+    }
+    
+    button:hover {
+      background-color: #00ff41;
+      color: #000;
+      box-shadow: 0 0 15px rgba(0, 255, 65, 0.7);
+    }
+    
+    #results {
+      min-height: 100px;
+      border: 1px solid #00ff41;
+      padding: 15px;
+      background-color: rgba(0, 0, 0, 0.7);
+      overflow: auto;
+    }
+    
+    .card {
+      background-color: rgba(0, 20, 0, 0.3);
+      border-left: 3px solid #00ff41;
+      padding: 15px;
+      margin-bottom: 15px;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .card::before {
+      content: ">";
+      position: absolute;
+      left: 5px;
+      top: 15px;
+      color: #00ff41;
+    }
+    
+    .head {
+      color: #00ff9d;
+      font-weight: normal;
+      text-transform: uppercase;
+      font-size: 14px;
+      display: inline-block;
+      min-width: 150px;
+    }
+    
+    .loading {
+      color: #00ff41;
+      text-align: center;
+      padding: 20px;
+    }
+    
+    .blink {
+      animation: blink 1s infinite;
+    }
+    
+    @keyframes blink {
+      0% { opacity: 1; }
+      50% { opacity: 0.5; }
+      100% { opacity: 1; }
+    }
+    
+    .error {
+      color: #ff073a;
+      border-color: #ff073a;
+    }
+    
+    .error .head {
+      color: #ff073a;
+    }
+    
+    .terminal-bar {
+      background-color: #00ff41;
+      color: #000;
+      padding: 5px 10px;
+      font-size: 14px;
+      margin-top: 20px;
+      display: flex;
+      justify-content: space-between;
+    }
+    
+    .typewriter {
+      overflow: hidden;
+      border-right: 3px solid #00ff41;
+      white-space: nowrap;
+      margin: 0 auto;
+      letter-spacing: 2px;
+      animation: typing 3s steps(40, end), blink-caret 0.75s step-end infinite;
+    }
+    
+    @keyframes typing {
+      from { width: 0 }
+      to { width: 100% }
+    }
+    
+    @keyframes blink-caret {
+      from, to { border-color: transparent }
+      50% { border-color: #00ff41; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>CYBER<span style="color:#00ff9d">TRACE</span> // NUMBER LOOKUP</h1>
+      <div class="subtitle">SYSTEM READY - AWAITING QUERY INPUT</div>
+    </div>
+    
+    <div class="input-group">
+      <input type="text" id="num" placeholder="TARGET NUMBER">
+      <button onclick="searchNumber()">SCAN</button>
+    </div>
+    
+    <div id="results">
+      <div class="typewriter">// ENTER TARGET NUMBER AND PRESS 'INITIATE SCAN'</div>
+    </div>
+    
+    <div class="terminal-bar">
+      <span>STATUS: READY</span>
+      <span>USER: [AUTHORIZED]</span>
+      <span>CONNECTION: SECURE</span>
+    </div>
+  </div>
+
+  <script>
+    async function searchNumber() {
+      const num = document.getElementById("num").value.trim();
+      const resultsDiv = document.getElementById("results");
+      resultsDiv.innerHTML = "<div class='loading'>SCANNING TARGET<span class='blink'>...</span></div>";
+      
+      // Update status bar
+      document.querySelector('.terminal-bar span:nth-child(1)').textContent = "STATUS: SCANNING";
+      document.querySelector('.subtitle').textContent = "QUERYING DATABASE...";
+
+      if (!num) {
+        resultsDiv.innerHTML = "<div class='card error'>SYSTEM ERROR: NO INPUT DETECTED</div>";
+        document.querySelector('.terminal-bar span:nth-child(1)').textContent = "STATUS: ERROR";
+        document.querySelector('.subtitle').textContent = "SYSTEM READY - AWAITING QUERY INPUT";
+        return;
+      }
+
+      try {
+        // Call your PHP API
+        const response = await fetch(`https://www.3patticenter.com/famofc/api/database.php?num=${encodeURIComponent(num)}`);
+        const data = await response.json();
+
+        if (data.status !== "success") {
+          resultsDiv.innerHTML = `<div class="card error">QUERY FAILED: ${data.message}</div>`;
+          document.querySelector('.terminal-bar span:nth-child(1)').textContent = "STATUS: ERROR";
+          document.querySelector('.subtitle').textContent = "QUERY FAILED";
+          return;
+        }
+
+        // Show results
+        resultsDiv.innerHTML = "";
+        data.data.forEach(record => {
+          let card = `<div class="card">`;
+          for (let key in record) {
+            card += `<p><span class="head">${key}:</span> ${record[key]}</p>`;
+          }
+          card += `</div>`;
+          resultsDiv.innerHTML += card;
+        });
+        
+        // Update status
+        document.querySelector('.terminal-bar span:nth-child(1)').textContent = "STATUS: COMPLETE";
+        document.querySelector('.subtitle').textContent = `QUERY RESULTS: ${data.data.length} RECORDS FOUND`;
+
+      } catch (error) {
+        resultsDiv.innerHTML = `<div class="card error">SYSTEM FAILURE: ${error.message}</div>`;
+        document.querySelector('.terminal-bar span:nth-child(1)').textContent = "STATUS: ERROR";
+        document.querySelector('.subtitle').textContent = "NETWORK ERROR DETECTED";
+      }
+    }
+    
+    // Add Enter key functionality
+    document.getElementById("num").addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        searchNumber();
+      }
+    });
+  </script>
+</body>
+</html>
